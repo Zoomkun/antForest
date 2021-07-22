@@ -41,15 +41,13 @@
             }
         });
 
+        var _popWidth = document.documentElement.clientWidth
+        var _popHeight = ($('.tab-bar').offset().top)
+        var _centerPopSize = 200
+        var bigPopTop = Math.round((_popWidth - _centerPopSize) / 2) + 50;
+        var bigPopLeft = Math.round((_popHeight - _centerPopSize) / 2) - 50;
         function initPop() {
             var position = new Array();
-            var _popWidth = document.documentElement.clientWidth
-            var _popHeight = ($('.tab-bar').offset().top)
-            var _centerPopSize = 200
-            var bigPopTop = Math.round((_popWidth - _centerPopSize) / 2) + 50;
-            var bigPopLeft = Math.round((_popHeight - _centerPopSize) / 2) - 50;
-            console.log(bigPopTop)
-            console.log(bigPopLeft)
             var bigPopHtml = `<div class="popBig" style="left: ${bigPopLeft}px; width: ${_centerPopSize - 20}px; height: ${_centerPopSize - 20}px; top: ${bigPopTop}px; animation: ani_circle 2.5s infinite;"><p>我的星币</p>$100<p class="btn">一键收取</p></div>`
             $('.content').append(bigPopHtml);
             //初始化布局数组
@@ -98,7 +96,6 @@
                 checkStartY = Math.max(treeY - Math.ceil(treeRadius) - treeRadiusMax, 0);
                 checkEndX = Math.min(treeX + Math.ceil(treeRadius) + treeRadiusMax, 99);
                 checkEndY = Math.min(treeY + Math.ceil(treeRadius) + treeRadiusMax, 99);
-
                 for (var x = checkStartX; x <= checkEndX; x++) {
                     for (var y = checkStartY; y <= checkEndY; y++) {
                         //除了当前位置 和框定范围内已经植入的树木比较距离
@@ -125,7 +122,10 @@
                     var elementRadius = position[treeX][treeY].radius * factor * 2;
                     var elementLeft = (treeX - position[treeX][treeY].radius) * factor;
                     var elementTop = (treeY - position[treeX][treeY].radius) * factor;
-                    showResult(i, elementSize, elementRadius, elementLeft, elementTop);
+                    if(elementLeft>0 && elementTop>0 && (elementLeft+elementSize)<_popWidth){
+
+                        showResult(i, elementSize, elementRadius, elementLeft, elementTop);
+                    }
 
                 }
 
@@ -160,10 +160,14 @@
         })
         // 添加删除事件
         $(document).on("click", ".popBig .btn", function () {
+            var _popPosition = $('.popBig').position()
+            var _popTop = _popPosition.top + 100
+            var _popLeft = _popPosition.left + 100
 
             $(".popSmall").delay(200).animate({
-                opacity: 0
-            }, function () {
+                top: _popTop,
+                left: _popLeft,
+            },'slow', function () {
                 $(".popSmall").remove()
             })
         })
