@@ -44,11 +44,11 @@
         var _popWidth = document.documentElement.clientWidth
         var _popHeight = ($('.tab-bar').offset().top)
         var _centerPopSize = 200
-        var bigPopTop = Math.round((_popWidth - _centerPopSize) / 2) + 50;
-        var bigPopLeft = Math.round((_popHeight - _centerPopSize) / 2) - 50;
+        var bigPopTop = Math.round((_popWidth - _centerPopSize) / 2) + 60;
+        var bigPopLeft = Math.round((_popHeight - _centerPopSize) / 2) - 38;
         function initPop() {
             var position = new Array();
-            var bigPopHtml = `<div class="popBig" style="left: ${bigPopLeft}px; width: ${_centerPopSize - 20}px; height: ${_centerPopSize - 20}px; top: ${bigPopTop}px; animation: ani_circle 2.5s infinite;"><p>我的星币</p>$100<p class="btn">一键收取</p></div>`
+            var bigPopHtml = `<div class="popBig" style="left: ${bigPopLeft}px; width: ${_centerPopSize - 30}px; height: ${_centerPopSize - 30}px; top: ${bigPopTop}px; animation: ani_circle 2.5s infinite;"><p>我的星币</p>$100<p class="btn">一键收取</p></div>`
             $('.content').append(bigPopHtml);
             //初始化布局数组
             for (var i = 0; i < 100; i++) {
@@ -68,10 +68,10 @@
                 var treeX = Math.floor(Math.random() * (_popWidth / 10));
                 var treeY = Math.floor(Math.random() * (_popHeight / 10));
                 //不种植的区域排除掉
-                var vacantStartX = Math.round((_popWidth - _centerPopSize) / 20);
-                var vacantEndX = Math.round(((_popWidth - _centerPopSize) / 2 + _centerPopSize) / 10);
-                var vacantStartY = Math.round((_popHeight - _centerPopSize) / 20);
-                var vacantEndY = Math.round(((_popHeight - _centerPopSize) / 2 + _centerPopSize) / 10);
+                var vacantStartX = Math.round((_popWidth - _centerPopSize-10) / 20);
+                var vacantEndX = Math.round(((_popWidth - _centerPopSize+10) / 2 + _centerPopSize) / 10);
+                var vacantStartY = Math.round((_popHeight - _centerPopSize-10) / 20);
+                var vacantEndY = Math.round(((_popHeight - _centerPopSize+10) / 2 + _centerPopSize) / 10);
 
 
                 if (treeX >= vacantStartX && treeX <= vacantEndX && treeY >= vacantStartY && treeY <= vacantEndY) {
